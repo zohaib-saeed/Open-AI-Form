@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useCompleteModeStyles = createStyles((theme) => ({
+export const useEditModeStyles = createStyles((theme) => ({
   container: {
     width: "100%",
     height: "100%",
@@ -16,32 +16,35 @@ export const useCompleteModeStyles = createStyles((theme) => ({
     gridTemplateColumns: "1fr 1fr",
     gridGap: "1rem",
     height: "100%",
+    // maxHeight: "420px",
     [`@media (max-width: ${theme.breakpoints.md}px)`]: {
       gridTemplateColumns: "1fr",
     },
   },
-  inputBox: {
-    width: "100%",
-    height: "100%",
-    resize: "none",
-    fontSize: `${theme.fontSizes.sm}px`,
-    padding: "0.5rem 0.5rem",
-    borderRadius: "4px",
-    color: theme.colors.lightGray[0],
-    border: `2px solid ${theme.colors.lightGray[0]}`,
-    "&:focus": {
-      border: `2px solid ${theme.colors.lightGray[0]}`,
-      outline: "none",
-    },
-    "&::placeholder": {
-      color: theme.colors.lightGray[0],
-      fontSize: `${theme.fontSizes.xs}px`,
+  leftInputBox: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "4fr 1fr",
+    [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
       display: "none",
     },
   },
-
+  inputMobile: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "3fr 1fr",
+    width: "100%",
+    height: "100%",
+    [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
+      display: "none",
+    },
+  },
   textAreaRoot: {
     height: "100%",
+    width: "100%",
+  },
+  grammerTextAreaRoot: {
+    // height: "100%",
     width: "100%",
   },
   textAreaWrapper: {
@@ -52,6 +55,18 @@ export const useCompleteModeStyles = createStyles((theme) => ({
     "&:focus": {
       borderColor: theme.colors.lightGray[0],
     },
+  },
+  textAreaLabel: {
+    color: theme.colors.fonts[0],
+    fontSize: `${theme.fontSizes.xs}px`,
+    fontWeight: 400,
+    marginBottom: "8px",
+  },
+  grammerBox: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   btnRoot: {
     backgroundColor: theme.colors.blueGreen[0],

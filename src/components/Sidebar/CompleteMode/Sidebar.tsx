@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select } from "@mantine/core";
 import { NumberInput } from "@mantine/core";
 import { Slider } from "@mantine/core";
@@ -7,19 +7,81 @@ import { RxChevronDown as IconChevronDown } from "react-icons/rx";
 import { FaCheckSquare as CheckBoxIcon } from "react-icons/fa";
 
 import { useCompleteSidebarStyles } from "./Sidebar.styles";
+import { useModeContext } from "../../../Context/FormContext";
 
 const Sidebar = () => {
   const { classes } = useCompleteSidebarStyles();
-  const [value, setValue] = useState<string | null>("react");
-  const [tempValue, setTempValue] = useState(0.7);
-  const [maxLength, setMaxLength] = useState(4000);
+
+  const {
+    mode,
+    compInput,
+    setCompInput,
+    compTemp,
+    setCompTemp,
+    compMode,
+    setCompMode,
+    compModel,
+    setCompModel,
+    compMaxLength,
+    setCompMaxLength,
+    compStopSeq,
+    setCompStopSeq,
+    compTopP,
+    setCompTopP,
+    compFreqPenalty,
+    setCompFreqPenalty,
+    compPresencePenalty,
+    setCompPresencePenalty,
+    compBestOf,
+    setCompBestOf,
+    startText,
+    setStartText,
+    restartText,
+    setRestartText,
+    probabilities,
+    setProbabilities,
+  } = useModeContext();
+
+  useEffect(() => {
+    setCompMode({
+      mode: mode,
+      input: compInput,
+      model: compModel,
+      tempreture: compTemp,
+      maxLength: compMaxLength,
+      stopSequence: compStopSeq,
+      topP: compTopP,
+      frequencyPenalty: compFreqPenalty,
+      presencePenalty: compPresencePenalty,
+      bestOf: compBestOf,
+      insertStartText: startText,
+      insertRestartText: restartText,
+      probabilities: probabilities,
+    });
+  }, [
+    mode,
+    compInput,
+    compModel,
+    compTemp,
+    compMaxLength,
+    compStopSeq,
+    compTopP,
+    compFreqPenalty,
+    compPresencePenalty,
+    compBestOf,
+    startText,
+    restartText,
+    probabilities,
+    setCompMode,
+  ]);
+
   return (
     <div className={classes.container}>
       {/* => Select Box */}
       <Select
         label="Model"
-        value={value}
-        onChange={setValue}
+        value={compModel}
+        onChange={setCompModel}
         rightSection={<IconChevronDown />}
         classNames={{
           root: classes.selectRoot,
@@ -28,18 +90,18 @@ const Sidebar = () => {
           item: classes.selectDropdownItem,
         }}
         data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
+          { value: "text-davinci-003", label: "text-davinci-003" },
+          { value: "text-curie-001", label: "text-curie-001" },
+          { value: "text-babbade-001", label: "text-babbade-001" },
+          { value: "text-adda-001", label: "text-adda-001" },
         ]}
       />
       {/* => Temprature */}
       <div className={classes.tempratureWrapper}>
         <div className={classes.tempratureTopWrapper}>
           <p className={classes.tempratureLabel}>Temperature</p>
-          <NumberInput
-            value={tempValue}
+          {/* <NumberInput
+            value={compTemp}
             min={0}
             step={0.01}
             defaultValue={tempValue}
@@ -48,7 +110,7 @@ const Sidebar = () => {
             classNames={{
               input: classes.tempInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
@@ -56,10 +118,9 @@ const Sidebar = () => {
           min={0}
           max={1}
           step={0.01}
-          defaultValue={tempValue}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setTempValue}
+          // showLabelOnHover={false}
+          value={compTemp}
+          onChange={setCompTemp}
           classNames={{
             root: classes.tempSliderRoot,
           }}
@@ -69,7 +130,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Maximum Length</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -79,18 +140,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
-          step={0.01}
-          defaultValue={maxLength}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          max={256}
+          step={1}
+          defaultValue={compMaxLength}
+          // showLabelOnHover={false}
+          value={compMaxLength}
+          onChange={setCompMaxLength}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -101,6 +162,8 @@ const Sidebar = () => {
         <TextInput
           placeholder="Enter a sequence"
           label="Stop Sequences"
+          value={compStopSeq}
+          onChange={(event) => setCompStopSeq(event.currentTarget.value)}
           classNames={{
             input: classes.stopSeqInput,
             label: classes.stopSeqLabel,
@@ -111,7 +174,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Top P </p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -121,7 +184,7 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
@@ -129,10 +192,10 @@ const Sidebar = () => {
           min={0}
           max={1}
           step={0.01}
-          defaultValue={maxLength}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          // showLabelOnHover={false}
+          value={compTopP}
+          defaultValue={compTopP}
+          onChange={setCompTopP}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -142,7 +205,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Frequency Penalty</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -152,18 +215,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={2}
           step={0.01}
-          defaultValue={maxLength}
+          defaultValue={compFreqPenalty}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={compFreqPenalty}
+          onChange={setCompFreqPenalty}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -173,7 +236,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Presence penalty</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -183,18 +246,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={2}
           step={0.01}
-          defaultValue={maxLength}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          defaultValue={compPresencePenalty}
+          // showLabelOnHover={false}
+          value={compPresencePenalty}
+          onChange={setCompPresencePenalty}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -204,7 +267,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Best of</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -214,18 +277,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={20}
           step={0.01}
-          defaultValue={maxLength}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          defaultValue={compBestOf}
+          // showLabelOnHover={false}
+          value={compBestOf}
+          onChange={setCompBestOf}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -235,8 +298,11 @@ const Sidebar = () => {
       <TextInput
         label="Inject Start Text"
         placeholder=""
+        value={startText}
+        onChange={(event) => setStartText(event.currentTarget.value)}
         icon={<CheckBoxIcon />}
         classNames={{
+          root: classes.withIconInputRoot,
           input: classes.withIconInput,
           label: classes.withIconInputLabel,
         }}
@@ -245,8 +311,11 @@ const Sidebar = () => {
       <TextInput
         label="Inject Restart Text"
         placeholder=""
+        value={restartText}
+        onChange={(event) => setRestartText(event.currentTarget.value)}
         icon={<CheckBoxIcon />}
         classNames={{
+          root: classes.withIconInputRoot,
           input: classes.withIconInput,
           label: classes.withIconInputLabel,
         }}
@@ -254,8 +323,8 @@ const Sidebar = () => {
       {/* => Select Box */}
       <Select
         label="Show probabilities"
-        value={value}
-        onChange={setValue}
+        value={probabilities}
+        onChange={setProbabilities}
         rightSection={<IconChevronDown />}
         classNames={{
           root: classes.selectRoot,
@@ -264,10 +333,10 @@ const Sidebar = () => {
           item: classes.selectDropdownItem,
         }}
         data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
+          { value: "off", label: "Off" },
+          { value: "most-likely", label: "Most Likely" },
+          { value: "least-likely", label: "Least Likely" },
+          { value: "full-spectrum", label: "Full Spectrum" },
         ]}
       />
     </div>

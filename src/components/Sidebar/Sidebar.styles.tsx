@@ -2,7 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useSidebarStyles = createStyles((theme) => ({
   container: {
-    wisth: "100%",
+    width: "100%",
     height: "100%",
     display: "flex",
     justifyContent: "center",
@@ -48,5 +48,11 @@ export const useSidebarStyles = createStyles((theme) => ({
       padding: "8px 16px",
       borderBottom: `2px solid ${theme.colors.lightGray[0]}`,
     },
+  },
+  tooltip: {
+    fontSize: `${theme.fontSizes.xs}px`,
+  },
+  scrollbar: {
+    backgroundColor: theme.colors.blueGreen[0],
   },
 }));

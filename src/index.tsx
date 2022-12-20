@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ModeContextProvider } from "./Context/FormContext";
 
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 import { theme } from "./theme";
@@ -13,15 +14,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider
-      theme={{ ...theme } as MantineThemeOverride}
-      withGlobalStyles
-      withNormalizeCSS
-    >
-      <Layout>
-        <App />
-      </Layout>
-    </MantineProvider>
+    <ModeContextProvider>
+      <MantineProvider
+        theme={{ ...theme } as MantineThemeOverride}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <Layout>
+          <App />
+        </Layout>
+      </MantineProvider>
+    </ModeContextProvider>
   </React.StrictMode>
 );
 

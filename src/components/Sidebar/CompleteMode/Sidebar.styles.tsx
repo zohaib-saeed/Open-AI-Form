@@ -133,6 +133,7 @@ export const useCompleteSidebarStyles = createStyles((theme) => ({
   },
   // With icon input
   withIconInput: {
+    width: "100%",
     border: `2px solid ${theme.colors.lightGray[0]}`,
     padding: "6px 8px",
     color: theme.colors.fonts[0],
@@ -141,6 +142,9 @@ export const useCompleteSidebarStyles = createStyles((theme) => ({
     "&:focus": {
       border: `2px solid ${theme.colors.lightGray[0]}`,
     },
+  },
+  withIconInputRoot: {
+    width: "100%",
   },
   withIconInputLabel: {
     color: theme.colors.fonts[0],

@@ -1,25 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Select } from "@mantine/core";
-import { NumberInput } from "@mantine/core";
 import { Slider } from "@mantine/core";
 import { TextInput } from "@mantine/core";
 import { RxChevronDown as IconChevronDown } from "react-icons/rx";
-import { FaCheckSquare as CheckBoxIcon } from "react-icons/fa";
 
 import { useInsertSidebarStyles } from "./Sidebar.styles";
+import { useModeContext } from "../../../Context/FormContext";
 
 const Sidebar = () => {
   const { classes } = useInsertSidebarStyles();
-  const [value, setValue] = useState<string | null>("react");
-  const [tempValue, setTempValue] = useState(0.7);
-  const [maxLength, setMaxLength] = useState(4000);
+  const {
+    mode,
+    insertInput,
+    setInsertInput,
+    insertTemp,
+    setInsertTemp,
+    insertModel,
+    setInsertModel,
+    insertMaxLength,
+    setInsertMaxLength,
+    insertStopSeq,
+    setInsertStopSeq,
+    insertTopP,
+    setInsertTopP,
+    insertFreqPenalty,
+    setInsertFreqPenalty,
+    insertPresencePenalty,
+    setInsertPresencePenalty,
+    insertBestOf,
+    setInsertBestOf,
+    insertMode,
+    setInsertMode,
+  } = useModeContext();
+
+  useEffect(() => {
+    setInsertMode({
+      mode,
+      input: insertInput,
+      model: insertModel,
+      tempreture: insertTemp,
+      maxLength: insertMaxLength,
+      stopSequence: insertStopSeq,
+      topP: insertTopP,
+      frequencyPenalty: insertFreqPenalty,
+      presencePenalty: insertPresencePenalty,
+      bestOf: insertBestOf,
+    });
+  }, [
+    mode,
+    insertInput,
+    insertModel,
+    insertTemp,
+    insertMaxLength,
+    insertStopSeq,
+    insertTopP,
+    insertFreqPenalty,
+    insertPresencePenalty,
+    insertBestOf,
+    setInsertMode,
+  ]);
+
   return (
     <div className={classes.container}>
       {/* => Select Box */}
       <Select
         label="Model"
-        value={value}
-        onChange={setValue}
+        value={insertModel}
+        onChange={setInsertModel}
         rightSection={<IconChevronDown />}
         classNames={{
           root: classes.selectRoot,
@@ -28,17 +75,17 @@ const Sidebar = () => {
           item: classes.selectDropdownItem,
         }}
         data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
+          { value: "text-davinci-003", label: "text-davinci-003" },
+          { value: "text-curie-001", label: "text-curie-001" },
+          { value: "text-babbade-001", label: "text-babbade-001" },
+          { value: "text-adda-001", label: "text-adda-001" },
         ]}
       />
       {/* => Temprature */}
       <div className={classes.tempratureWrapper}>
         <div className={classes.tempratureTopWrapper}>
           <p className={classes.tempratureLabel}>Temperature</p>
-          <NumberInput
+          {/* <NumberInput
             value={tempValue}
             min={0}
             step={0.01}
@@ -48,7 +95,7 @@ const Sidebar = () => {
             classNames={{
               input: classes.tempInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
@@ -56,10 +103,9 @@ const Sidebar = () => {
           min={0}
           max={1}
           step={0.01}
-          defaultValue={tempValue}
-          showLabelOnHover={false}
-          value={tempValue}
-          onChange={setTempValue}
+          defaultValue={insertTemp}
+          value={insertTemp}
+          onChange={setInsertTemp}
           classNames={{
             root: classes.tempSliderRoot,
           }}
@@ -69,7 +115,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Maximum Length</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -79,18 +125,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
-          step={0.01}
-          defaultValue={maxLength}
+          max={256}
+          step={1}
+          defaultValue={insertMaxLength}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={insertMaxLength}
+          onChange={setInsertMaxLength}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -101,6 +147,8 @@ const Sidebar = () => {
         <TextInput
           placeholder="Enter a sequence"
           label="Stop Sequences"
+          value={insertStopSeq}
+          onChange={(event) => setInsertStopSeq(event.currentTarget.value)}
           classNames={{
             input: classes.stopSeqInput,
             label: classes.stopSeqLabel,
@@ -111,7 +159,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Top P </p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -121,7 +169,7 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
@@ -129,10 +177,10 @@ const Sidebar = () => {
           min={0}
           max={1}
           step={0.01}
-          defaultValue={maxLength}
+          defaultValue={insertTopP}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={insertTopP}
+          onChange={setInsertTopP}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -142,7 +190,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Frequency Penalty</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -152,18 +200,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={2}
           step={0.01}
-          defaultValue={maxLength}
+          defaultValue={insertFreqPenalty}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={insertFreqPenalty}
+          onChange={setInsertFreqPenalty}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -173,28 +221,29 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Presence penalty</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
+            max={2}
             step={0.01}
-            defaultValue={maxLength}
+            defaultValue={insertPresencePenalty}
             size="xs"
             hideControls={true}
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={2}
           step={0.01}
-          defaultValue={maxLength}
+          defaultValue={insertPresencePenalty}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={insertPresencePenalty}
+          onChange={setInsertPresencePenalty}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}
@@ -204,7 +253,7 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Best of</p>
-          <NumberInput
+          {/* <NumberInput
             value={maxLength}
             min={0}
             step={0.01}
@@ -214,18 +263,18 @@ const Sidebar = () => {
             classNames={{
               input: classes.maxLengthInput,
             }}
-          />
+          /> */}
         </div>
         <Slider
           color="gray"
           size="xs"
           min={0}
-          max={1}
+          max={20}
           step={0.01}
-          defaultValue={maxLength}
+          defaultValue={insertBestOf}
           showLabelOnHover={false}
-          value={tempValue}
-          onChange={setMaxLength}
+          value={insertBestOf}
+          onChange={setInsertBestOf}
           classNames={{
             root: classes.maxLengthSliderRoot,
           }}

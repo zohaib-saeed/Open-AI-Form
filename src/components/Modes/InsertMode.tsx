@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import { Textarea, Button } from "@mantine/core";
-import { useCompleteModeStyles } from "./Complete.styles";
+import { useInsertModeStyles } from "./InsertMode.styles";
 import { useModeContext } from "../../Context/FormContext";
 
-const Complete = () => {
-  const { classes } = useCompleteModeStyles();
-
-  const { compMode, compInput, setCompInput } = useModeContext();
+const Insert = () => {
+  const { classes } = useInsertModeStyles();
+  const { insertMode, insertInput, setInsertInput } = useModeContext();
   const [submit, setSubmit] = useState(false);
-
   const clickHandler = () => {
     setSubmit(true);
-    console.log(JSON.stringify(compMode));
+    console.log(JSON.stringify(insertMode));
   };
-
   return (
     <div className={classes.container}>
       {/* Input Field + Output Box */}
@@ -21,8 +18,8 @@ const Complete = () => {
         {/* => Input  */}
         <Textarea
           placeholder="Insert text here"
-          value={compInput}
-          onChange={(event) => setCompInput(event.currentTarget.value)}
+          value={insertInput}
+          onChange={(event) => setInsertInput(event.currentTarget.value)}
           classNames={{
             root: classes.textAreaRoot,
             wrapper: classes.textAreaWrapper,
@@ -33,7 +30,7 @@ const Complete = () => {
         {/* =>Output Box */}
         {submit ? (
           <Textarea
-            value={JSON.stringify(compMode)}
+            value={JSON.stringify(insertMode)}
             classNames={{
               root: classes.textAreaRoot,
               wrapper: classes.textAreaWrapper,
@@ -51,8 +48,12 @@ const Complete = () => {
           />
         )}
       </div>
+
       {/* =>Submit Btn */}
       <div className={classes.btnWrapper}>
+        {/* <button className={classes.submitBtn} onClick={clickHandler}>
+          Submit
+        </button> */}
         <Button onClick={clickHandler} classNames={{ root: classes.btnRoot }}>
           Submit
         </Button>
@@ -61,4 +62,4 @@ const Complete = () => {
   );
 };
 
-export default Complete;
+export default Insert;

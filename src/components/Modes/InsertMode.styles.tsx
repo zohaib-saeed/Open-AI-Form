@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useCompleteModeStyles = createStyles((theme) => ({
+export const useInsertModeStyles = createStyles((theme) => ({
   container: {
     width: "100%",
     height: "100%",
@@ -16,27 +16,18 @@ export const useCompleteModeStyles = createStyles((theme) => ({
     gridTemplateColumns: "1fr 1fr",
     gridGap: "1rem",
     height: "100%",
+    // maxHeight: "470px",
     [`@media (max-width: ${theme.breakpoints.md}px)`]: {
       gridTemplateColumns: "1fr",
     },
   },
-  inputBox: {
-    width: "100%",
-    height: "100%",
-    resize: "none",
+
+  btnRoot: {
+    backgroundColor: theme.colors.blueGreen[0],
     fontSize: `${theme.fontSizes.sm}px`,
-    padding: "0.5rem 0.5rem",
-    borderRadius: "4px",
-    color: theme.colors.lightGray[0],
-    border: `2px solid ${theme.colors.lightGray[0]}`,
-    "&:focus": {
-      border: `2px solid ${theme.colors.lightGray[0]}`,
-      outline: "none",
-    },
-    "&::placeholder": {
-      color: theme.colors.lightGray[0],
-      fontSize: `${theme.fontSizes.xs}px`,
-      display: "none",
+    "&:hover": {
+      backgroundColor: theme.colors.blueGreen[0],
+      opacity: "80%",
     },
   },
 
@@ -53,13 +44,8 @@ export const useCompleteModeStyles = createStyles((theme) => ({
       borderColor: theme.colors.lightGray[0],
     },
   },
-  btnRoot: {
-    backgroundColor: theme.colors.blueGreen[0],
-    fontSize: `${theme.fontSizes.sm}px`,
-    "&:hover": {
-      backgroundColor: theme.colors.blueGreen[0],
-      opacity: "80%",
-    },
+  disableTextAreaInput: {
+    backgroundColor: theme.colors.lightGray[0],
   },
 
   btnWrapper: {
