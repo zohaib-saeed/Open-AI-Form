@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Select } from "@mantine/core";
-import { NumberInput } from "@mantine/core";
 import { Slider } from "@mantine/core";
 import { TextInput } from "@mantine/core";
 import { RxChevronDown as IconChevronDown } from "react-icons/rx";
@@ -10,11 +9,11 @@ import { useModeContext } from "../../../Context/FormContext";
 
 const Sidebar = () => {
   const { classes } = useEditSidebarStyles();
+  //  using the context
+
   const {
     mode,
-    setMode,
     editInput,
-    setEditInput,
     editTemp,
     setEditTemp,
     editModel,
@@ -23,10 +22,8 @@ const Sidebar = () => {
     setEditStopSeq,
     editTopP,
     setEditTopP,
-    editMode,
     setEditMode,
     editInstructions,
-    setEditInstructions,
   } = useModeContext();
 
   useEffect(() => {
@@ -75,17 +72,6 @@ const Sidebar = () => {
       <div className={classes.tempratureWrapper}>
         <div className={classes.tempratureTopWrapper}>
           <p className={classes.tempratureLabel}>Temperature</p>
-          {/* <NumberInput
-            value={tempValue}
-            min={0}
-            step={0.01}
-            defaultValue={tempValue}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.tempInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -119,17 +105,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Top P </p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            step={0.01}
-            defaultValue={maxLength}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useLayoutStyles } from "./Layout.styles";
-import CompleteModeSidebar from "../Sidebar/CompleteMode/Sidebar";
-import EditModeSidebar from "../Sidebar/EditMode/Sidebar";
-import InsertModeSidebar from "../Sidebar/InsertMode/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
 import { Burger, Drawer } from "@mantine/core";
 

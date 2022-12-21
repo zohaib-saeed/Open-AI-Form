@@ -9,10 +9,11 @@ import { useModeContext } from "../../../Context/FormContext";
 
 const Sidebar = () => {
   const { classes } = useInsertSidebarStyles();
+  //  using the context
+
   const {
     mode,
     insertInput,
-    setInsertInput,
     insertTemp,
     setInsertTemp,
     insertModel,
@@ -29,7 +30,6 @@ const Sidebar = () => {
     setInsertPresencePenalty,
     insertBestOf,
     setInsertBestOf,
-    insertMode,
     setInsertMode,
   } = useModeContext();
 
@@ -85,17 +85,6 @@ const Sidebar = () => {
       <div className={classes.tempratureWrapper}>
         <div className={classes.tempratureTopWrapper}>
           <p className={classes.tempratureLabel}>Temperature</p>
-          {/* <NumberInput
-            value={tempValue}
-            min={0}
-            step={0.01}
-            defaultValue={tempValue}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.tempInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -115,17 +104,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Maximum Length</p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            step={0.01}
-            defaultValue={maxLength}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -159,17 +137,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Top P </p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            step={0.01}
-            defaultValue={maxLength}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -190,17 +157,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Frequency Penalty</p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            step={0.01}
-            defaultValue={maxLength}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -221,18 +177,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Presence penalty</p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            max={2}
-            step={0.01}
-            defaultValue={insertPresencePenalty}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
@@ -253,17 +197,6 @@ const Sidebar = () => {
       <div className={classes.maxLengthWrapper}>
         <div className={classes.maxLengthTopWrapper}>
           <p className={classes.maxLengthLabel}>Best of</p>
-          {/* <NumberInput
-            value={maxLength}
-            min={0}
-            step={0.01}
-            defaultValue={maxLength}
-            size="xs"
-            hideControls={true}
-            classNames={{
-              input: classes.maxLengthInput,
-            }}
-          /> */}
         </div>
         <Slider
           color="gray"
